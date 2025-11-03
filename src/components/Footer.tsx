@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-foreground/70 text-sm">
-            © {currentYear} Portfolio. All rights reserved.
+            © {currentYear} Garri Gelfers. All rights reserved.
           </p>
           
           <div className="flex gap-6">

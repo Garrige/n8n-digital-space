@@ -5,18 +5,18 @@ const About = () => {
   const skills = [
     {
       icon: Workflow,
-      title: "n8n Automation",
-      description: "Creating powerful workflow automations and integrations",
+      title: "n8n & Automation",
+      description: "Expert in n8n workflows, Docker, REST APIs, HubSpot & Pipedrive integration",
     },
     {
       icon: Sparkles,
-      title: "AI Agents",
-      description: "Building intelligent AI-powered automation solutions",
+      title: "AI & RAG Systems",
+      description: "OpenAI integration, embeddings, Pinecone, intelligent chatbots and assistants",
     },
     {
       icon: Code2,
-      title: "Web Development",
-      description: "Crafting modern, responsive web applications",
+      title: "Integration & Web",
+      description: "Telegram, Slack bots, custom web apps, and business process automation",
     },
   ];
 
@@ -28,9 +28,9 @@ const About = () => {
             About Me
           </h2>
           <p className="text-lg text-foreground/80 mb-12 text-center max-w-2xl mx-auto">
-            I specialize in creating AI agents and automating workflows with n8n, while also building 
-            custom web applications. My focus is on delivering intelligent solutions that streamline 
-            processes and enhance productivity.
+            AI Automation Engineer specializing in n8n workflows, RAG systems, and intelligent chatbots. 
+            I help businesses automate processes, integrate AI solutions, and build custom applications 
+            that drive efficiency and growth.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">

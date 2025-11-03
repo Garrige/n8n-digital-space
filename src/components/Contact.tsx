@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -82,26 +82,35 @@ const Contact = () => {
                 <Mail className="h-8 w-8 text-primary mb-3" />
                 <h3 className="text-lg font-semibold mb-2 text-foreground">Email</h3>
                 <a
-                  href="mailto:contact@example.com"
+                  href="mailto:garrigelfers@gmail.com"
                   className="text-foreground/70 hover:text-primary transition-colors"
                 >
-                  contact@example.com
+                  garrigelfers@gmail.com
                 </a>
+              </Card>
+
+              <Card className="p-6 bg-card border-border hover:bg-card-hover transition-colors">
+                <Phone className="h-8 w-8 text-primary mb-3" />
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Phone</h3>
+                <a
+                  href="tel:+37127782827"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
+                  +371 27782827
+                </a>
+              </Card>
+
+              <Card className="p-6 bg-card border-border hover:bg-card-hover transition-colors">
+                <MapPin className="h-8 w-8 text-primary mb-3" />
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Location</h3>
+                <p className="text-foreground/70">Riga, Latvia</p>
               </Card>
 
               <Card className="p-6 bg-card border-border hover:bg-card-hover transition-colors">
                 <h3 className="text-lg font-semibold mb-4 text-foreground">Connect</h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-background hover:bg-primary/10 rounded-lg transition-colors group"
-                  >
-                    <Github className="h-6 w-6 text-foreground group-hover:text-primary transition-colors" />
-                  </a>
-                  <a
-                    href="https://linkedin.com"
+                    href="https://linkedin.com/in/garr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-background hover:bg-primary/10 rounded-lg transition-colors group"

@@ -5,34 +5,34 @@ import { ExternalLink } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
-      title: "Customer Support AI Agent",
-      description: "Intelligent chatbot handling customer inquiries with natural language processing and automated response generation.",
-      technologies: ["n8n", "OpenAI", "Webhooks"],
+      title: "RAG-powered Support Assistant",
+      description: "AI system that significantly reduced response time using embeddings, knowledge base integration, and intelligent query processing for automated customer support.",
+      technologies: ["n8n", "OpenAI", "Pinecone", "Embeddings"],
     },
     {
-      title: "Workflow Automation System",
-      description: "End-to-end automation connecting multiple platforms, streamlining business processes and reducing manual work.",
-      technologies: ["n8n", "API Integration", "Database"],
+      title: "Lead Enrichment & CRM Integration",
+      description: "Automated data collection pipeline with real-time HubSpot and Pipedrive synchronization, streamlining sales processes and data quality.",
+      technologies: ["n8n", "HubSpot", "Pipedrive", "REST APIs"],
     },
     {
-      title: "E-commerce Website",
-      description: "Modern e-commerce platform with seamless shopping experience, payment integration, and inventory management.",
-      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      title: "AI Chat Receptionist",
+      description: "Intelligent client booking system with natural language understanding, achieving significant conversion rate improvements through automated conversations.",
+      technologies: ["n8n", "OpenAI", "Telegram", "Calendar API"],
     },
     {
-      title: "Lead Generation Bot",
-      description: "Automated lead collection and qualification system with CRM integration and email notifications.",
-      technologies: ["n8n", "CRM API", "Email Automation"],
+      title: "Multi-Platform Chatbot Integration",
+      description: "Unified AI assistant deployed across Telegram, Slack, and web platforms with context awareness and seamless user experience.",
+      technologies: ["n8n", "Telegram Bot API", "Slack API", "OpenAI"],
     },
     {
-      title: "Portfolio Website",
-      description: "Custom portfolio site showcasing projects with modern design, smooth animations, and responsive layout.",
-      technologies: ["React", "Vite", "shadcn/ui"],
+      title: "Document Processing Automation",
+      description: "Automated workflow for document extraction, analysis, and routing using AI to process and categorize business documents at scale.",
+      technologies: ["n8n", "OpenAI", "Docker", "Database"],
     },
     {
-      title: "Data Processing Pipeline",
-      description: "Automated data extraction, transformation, and loading pipeline for business intelligence reporting.",
-      technologies: ["n8n", "Python", "Database"],
+      title: "Business Analytics Dashboard",
+      description: "Custom web application with real-time data visualization and automated reporting for business intelligence and decision making.",
+      technologies: ["React", "TypeScript", "REST APIs"],
     },
   ];
 
