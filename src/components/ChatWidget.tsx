@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send } from "lucide-react";
@@ -17,6 +17,15 @@ const ChatWidget = () => {
   const [currentInput, setCurrentInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId] = useState(`session-${Date.now()}`);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
 
   const handleSend = async () => {
     if (!currentInput.trim() || isLoading) return;
@@ -43,33 +52,11 @@ const ChatWidget = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      // Читаем ответ как текст сначала
-      const textResponse = await response.text();
-      console.log("Raw response from n8n:", textResponse);
       
-      let aiResponse = "Извините, не удалось получить ответ.";
+      // Упрощенная и надежная обработка JSON ответа
+      const data = await response.json();
+      const aiResponse = data.response || "Извините, не удалось получить корректный ответ.";
       
-      // Пытаемся распарсить как JSON
-      try {
-        const data = JSON.parse(textResponse);
-        console.log("Parsed JSON:", data);
-        
-        // Проверяем разные возможные структуры ответа
-        if (data.response) {
-          aiResponse = data.response;
-        } else if (typeof data === 'string') {
-          aiResponse = data;
-        } else {
-          aiResponse = textResponse;
-        }
-      } catch (parseError) {
-        console.log("Not JSON, using as plain text");
-        // Если не JSON, используем как обычный текст
-        aiResponse = textResponse;
-      }
-      
-      // Добавляем ответ AI агента
       setMessages(prev => [...prev, { 
         text: aiResponse, 
         isBot: true 
@@ -108,9 +95,10 @@ const ChatWidget = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 h-[500px] bg-card border border-border rounded-lg shadow-2xl flex flex-col z-50 overflow-hidden">
+        // ИЗМЕНЕНИЕ 1: Адаптивность для мобильных
+        <div className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-card border border-border sm:inset-auto sm:bottom-6 sm:right-6 sm:h-[500px] sm:w-96 sm:rounded-lg sm:shadow-2xl">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary to-accent p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-primary to-accent p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
               <img src={garriLogo} alt="Garri Gelfers" className="w-10 h-10 rounded-full" />
               <div>
@@ -137,8 +125,9 @@ const ChatWidget = () => {
               >
                 <div
                   className={`max-w-[80%] rounded-lg p-3 ${
+                    // ИЗМЕНЕНИЕ 2: Улучшенный цветовой контраст
                     msg.isBot
-                      ? "bg-card border border-border text-foreground"
+                      ? "bg-slate-700 text-slate-100" 
                       : "bg-gradient-to-r from-primary to-accent text-white"
                   }`}
                 >
@@ -146,9 +135,10 @@ const ChatWidget = () => {
                 </div>
               </div>
             ))}
+            {/* Анимация загрузки */}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-card border border-border text-foreground rounded-lg p-3">
+                <div className="bg-slate-700 rounded-lg p-3">
                   <div className="flex gap-1">
                     <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
                     <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
@@ -157,10 +147,11 @@ const ChatWidget = () => {
                 </div>
               </div>
             )}
+            <div ref={messagesEndRef} />
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-border bg-card">
+          <div className="p-4 border-t border-border bg-card flex-shrink-0">
             <div className="flex gap-2">
               <Input
                 value={currentInput}
@@ -187,11 +178,3 @@ const ChatWidget = () => {
 };
 
 export default ChatWidget;
-
-
-
-
-
-
-
-
