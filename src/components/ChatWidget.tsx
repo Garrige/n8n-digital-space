@@ -53,7 +53,6 @@ const ChatWidget = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      // Упрощенная и надежная обработка JSON ответа
       const data = await response.json();
       const aiResponse = data.response || "Извините, не удалось получить корректный ответ.";
       
@@ -82,20 +81,25 @@ const ChatWidget = () => {
 
   return (
     <>
+      {/* --- ИЗМЕНЕНИЯ ЗДЕСЬ --- */}
       {/* Chat Button */}
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 z-50"
+          // 1. УВЕЛИЧЕН РАЗМЕР КНОПКИ
+          // 2. ИЗМЕНЕН ЦВЕТ ФОНА НА БЕЛЫЙ
+          className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg bg-white hover:bg-slate-100 z-50"
           size="icon"
         >
-          <MessageCircle className="h-6 w-6" />
+          {/* 3. УВЕЛИЧЕН РАЗМЕР ИКОНКИ И ИЗМЕНЕН ЕЕ ЦВЕТ НА СИНИЙ */}
+          <MessageCircle className="h-8 w-8 text-primary" />
         </Button>
       )}
+      {/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */}
+
 
       {/* Chat Window */}
       {isOpen && (
-        // ИЗМЕНЕНИЕ 1: Адаптивность для мобильных
         <div className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-card border border-border sm:inset-auto sm:bottom-6 sm:right-6 sm:h-[500px] sm:w-96 sm:rounded-lg sm:shadow-2xl">
           {/* Header */}
           <div className="bg-gradient-to-r from-primary to-accent p-4 flex items-center justify-between flex-shrink-0">
@@ -125,7 +129,6 @@ const ChatWidget = () => {
               >
                 <div
                   className={`max-w-[80%] rounded-lg p-3 ${
-                    // ИЗМЕНЕНИЕ 2: Улучшенный цветовой контраст
                     msg.isBot
                       ? "bg-slate-700 text-slate-100" 
                       : "bg-gradient-to-r from-primary to-accent text-white"
