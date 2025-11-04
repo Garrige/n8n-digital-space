@@ -110,7 +110,7 @@ const Contact = () => {
                 <h3 className="text-lg font-semibold mb-4 text-foreground">Connect</h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://linkedin.com/in/garr"
+                    href="https://www.linkedin.com/in/garri-gelfers-5a711637a/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-background hover:bg-primary/10 rounded-lg transition-colors group"
