@@ -1,48 +1,72 @@
+// src/components/Footer.tsx - ПОЛНОСТЬЮ ЗАМЕНИТЬ
+
+// Этот компонент отвечает за футер (подвал) сайта
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <footer className="bg-card border-t border-border py-8">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-foreground/70 text-sm">
-            © {currentYear} Garri Gelfers. All rights reserved.
-          </p>
+    <footer id="contact" className="bg-slate-900/50 border-t border-slate-800 mt-20">
+      <div className="container mx-auto px-4 py-12">
+        
+        {/* Верхняя часть с контактами */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left mb-10">
           
-          <div className="flex gap-6">
-            <button
-              onClick={() => scrollToSection("home")}
-              className="text-foreground/70 hover:text-primary transition-colors text-sm"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="text-foreground/70 hover:text-primary transition-colors text-sm"
-            >
-              Projects
-            </button>
-            <button
-              onClick={() => scrollToSection("about")}
-              className="text-foreground/70 hover:text-primary transition-colors text-sm"
-            >
-              About
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-foreground/70 hover:text-primary transition-colors text-sm"
-            >
-              Contact
-            </button>
+          <div>
+            <h3 className="font-bold text-lg mb-2">Get In Touch</h3>
+            <p className="text-slate-400">
+              Ready to automate your business or build an intelligent solution? Let's connect.
+            </p>
           </div>
+
+          <div>
+            <h3 className="font-bold text-lg mb-2">Contact Details</h3>
+            <ul className="text-slate-400 space-y-2">
+              <li>
+                <a href="mailto:garrigelfers@gmail.com" className="hover:text-white transition-colors">
+                  garrigelfers@gmail.com
+                </a>
+              </li>
+              <li>
+                <span>+371 27782827</span>
+              </li>
+              <li>
+                <span>Riga, Latvia</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-lg mb-2">Connect</h3>
+            <ul className="text-slate-400 space-y-2">
+              <li>
+                <a 
+                  href="https://www.linkedin.com/in/garri-gelfers-5a711637a/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-white transition-colors"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              {/* Если у вас есть GitHub, можно добавить и его */}
+              {/*
+              <li>
+                <a href="YOUR_GITHUB_URL" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  GitHub
+                </a>
+              </li>
+              */}
+            </ul>
+          </div>
+
         </div>
+
+        {/* Нижняя часть с копирайтом */}
+        <div className="border-t border-slate-800 pt-6 text-center text-slate-500 text-sm">
+          <p>&copy; {currentYear} Garri Gelfers. All Rights Reserved.</p>
+        </div>
+        
       </div>
     </footer>
   );
