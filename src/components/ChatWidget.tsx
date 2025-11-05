@@ -18,6 +18,11 @@ const ChatWidget = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId] = useState(`session-${Date.now()}`);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Rate limiting
+  const [messageTimestamps, setMessageTimestamps] = useState<number[]>([]);
+  const MAX_MESSAGES = 10;
+  const TIME_WINDOW = 5 * 60 * 1000; // 5 минут
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -27,8 +32,30 @@ const ChatWidget = () => {
     scrollToBottom();
   }, [messages, isLoading]);
 
+  const checkRateLimit = (): boolean => {
+    const now = Date.now();
+    const recentMessages = messageTimestamps.filter(ts => now - ts < TIME_WINDOW);
+    
+    if (recentMessages.length >= MAX_MESSAGES) {
+      return false;
+    }
+    
+    setMessageTimestamps([...recentMessages, now]);
+    return true;
+  };
+
   const handleSend = async () => {
     if (!currentInput.trim() || isLoading) return;
+
+    // Проверка rate limit
+    if (!checkRateLimit()) {
+      setMessages(prev => [...prev, { 
+        text: "Вы отправляете слишком много сообщений. Пожалуйста, подождите несколько минут или свяжитесь напрямую: garrigelfers@gmail.com", 
+        isBot: true 
+      }]);
+      setCurrentInput("");
+      return;
+    }
 
     const userMessage = currentInput;
     
@@ -53,8 +80,19 @@ const ChatWidget = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data = await response.json();
-      const aiResponse = data.response || "Извините, не удалось получить корректный ответ.";
+      // ИСПРАВЛЕНО: Сначала читаем как текст, потом пробуем JSON
+      const textResponse = await response.text();
+      console.log("Raw response from n8n:", textResponse);
+      
+      let aiResponse = "Извините, не удалось получить корректный ответ.";
+      
+      try {
+        const data = JSON.parse(textResponse);
+        aiResponse = data.response || textResponse;
+      } catch (e) {
+        // Если не JSON, используем как текст
+        aiResponse = textResponse;
+      }
       
       setMessages(prev => [...prev, { 
         text: aiResponse, 
@@ -81,26 +119,25 @@ const ChatWidget = () => {
 
   return (
     <>
-      {/* --- ИЗМЕНЕНИЯ ЗДЕСЬ --- */}
       {/* Chat Button */}
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          // 1. УВЕЛИЧЕН РАЗМЕР КНОПКИ
-          // 2. ИЗМЕНЕН ЦВЕТ ФОНА НА БЕЛЫЙ
           className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg bg-white hover:bg-slate-100 z-50"
           size="icon"
         >
-          {/* 3. УВЕЛИЧЕН РАЗМЕР ИКОНКИ И ИЗМЕНЕН ЕЕ ЦВЕТ НА СИНИЙ */}
           <MessageCircle className="h-8 w-8 text-primary" />
         </Button>
       )}
-      {/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */}
 
-
-      {/* Chat Window */}
+      {/* Chat Window - ИСПРАВЛЕН РАЗМЕР */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-card border border-border sm:inset-auto sm:bottom-6 sm:right-6 sm:h-[500px] sm:w-96 sm:rounded-lg sm:shadow-2xl">
+        <div className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-card border border-border 
+          sm:inset-auto sm:bottom-6 sm:right-6 
+          sm:h-[600px] sm:w-[450px]           
+          md:h-[650px] md:w-[500px]           
+          lg:h-[700px] lg:w-[550px]           
+          sm:rounded-lg sm:shadow-2xl">
           {/* Header */}
           <div className="bg-gradient-to-r from-primary to-accent p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
@@ -128,7 +165,7 @@ const ChatWidget = () => {
                 className={`flex ${msg.isBot ? "justify-start" : "justify-end"}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
+                  className={`max-w-[80%] rounded-lg p-3 whitespace-pre-wrap ${
                     msg.isBot
                       ? "bg-slate-700 text-slate-100" 
                       : "bg-gradient-to-r from-primary to-accent text-white"
@@ -138,7 +175,6 @@ const ChatWidget = () => {
                 </div>
               </div>
             ))}
-            {/* Анимация загрузки */}
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-slate-700 rounded-lg p-3">
