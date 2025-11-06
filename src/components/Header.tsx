@@ -1,4 +1,4 @@
-// src/components/Header.tsx - ПОЛНАЯ ЗАМЕНА (финальная версия)
+// src/components/Header.tsx - ФИНАЛЬНАЯ ВЕРСИЯ С ИСПРАВЛЕННЫМ ТЕГОМ
 
 const Header = () => {
   // Теперь "Contact" - это часть общей навигации
@@ -10,10 +10,10 @@ const Header = () => {
   ];
 
   return (
+    // Тег <header> открывается здесь
     <header className="sticky top-0 z-40 w-full border-b border-primary/20 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto flex h-16 items-center justify-center px-4">
         
-        {/* Вся навигация теперь в одном блоке и идеально по центру */}
         <nav className="flex items-center gap-4 md:gap-8">
           {navLinks.map((link) => (
             <a
@@ -27,7 +27,7 @@ const Header = () => {
         </nav>
         
       </div>
-    </footer>
+    </header> // <-- ВОТ ИСПРАВЛЕНИЕ: </header> вместо </footer>
   );
 };
 
