@@ -1,63 +1,44 @@
-import { useState, useEffect } from "react";
+// src/components/Header.tsx - ПОЛНАЯ ЗАМЕНА
+
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // Список навигационных ссылок для удобства
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "#projects", label: "Projects" },
+    { href: "#about", label: "About" },
+  ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-sm border-b border-border" : "bg-transparent"
-      }`}
-    >
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-gradient">Portfolio</div>
-          
-          <div className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection("home")}
-              className="text-foreground hover:text-primary transition-colors"
+    <header className="sticky top-0 z-40 w-full border-b border-primary/20 bg-background/80 backdrop-blur-sm">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        
+        {/* Пустой div слева для баланса, так как мы убрали логотип */}
+        <div className="w-20"></div>
+
+        {/* Навигационные ссылки в центре */}
+        <nav className="flex items-center gap-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-lg transition-all duration-300 hover:brightness-125"
             >
-              Home
-            </button>
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              Projects
-            </button>
-            <button
-              onClick={() => scrollToSection("about")}
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              About
-            </button>
-            <Button
-              onClick={() => scrollToSection("contact")}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
-            >
-              Contact
-            </Button>
-          </div>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Кнопка "Contact" справа */}
+        <div>
+          <a href="#contact">
+            <Button>Contact</Button>
+          </a>
         </div>
-      </nav>
-    </header>
+        
+      </div>
+    </footer>
   );
 };
 
