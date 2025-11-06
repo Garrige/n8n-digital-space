@@ -1,4 +1,4 @@
-// src/components/Header.tsx - ПОЛНАЯ ЗАМЕНА
+// src/components/Header.tsx - ПОЛНАЯ ЗАМЕНА (с исправлением)
 
 import { Button } from "@/components/ui/button";
 
@@ -20,8 +20,9 @@ const Header = () => {
         {/* Навигационные ссылки в центре */}
         <nav className="flex items-center gap-6">
           {navLinks.map((link) => (
+            // --- ИСПРАВЛЕНИЕ: Добавлен уникальный атрибут key={link.href} ---
             <a
-              key={link.label}
+              key={link.href} // <-- ВОТ ИСПРАВЛЕНИЕ
               href={link.href}
               className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-lg transition-all duration-300 hover:brightness-125"
             >
