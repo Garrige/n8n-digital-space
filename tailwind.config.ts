@@ -13,14 +13,15 @@ export default {
       },
     },
     extend: {
+      // --- НАЧАЛО ИЗМЕНЕНИЙ ---
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: "#080c0b", // Сделали фон почти черным для контраста
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#0c3a2d", // Глубокий зеленый с вашего фото
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -36,7 +37,7 @@ export default {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
+          DEFAULT: "#a37f4f", // Акцентный цвет, взятый с деревянного стола
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
@@ -58,6 +59,7 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      // --- КОНЕЦ ИЗМЕНЕНИЙ ---
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
