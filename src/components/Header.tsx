@@ -1,22 +1,37 @@
-// src/components/Header.tsx - ФИНАЛЬНАЯ ВЕРСИЯ С ИСПРАВЛЕННЫМ ТЕГОМ
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Language } from '@/lib/i18n';
+import { Button } from '@/components/ui/button';
+import { Globe } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Header = () => {
-  // Теперь "Contact" - это часть общей навигации
+  const { language, setLanguage, t } = useLanguage();
+
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "#projects", label: "Projects" },
-    { href: "#about", label: "About" },
-    { href: "#contact", label: "Contact" },
+    { href: "/", label: t.home },
+    { href: "#projects", label: t.projects },
+    { href: "#about", label: t.about },
+    { href: "#contact", label: t.contact },
+  ];
+
+  const languages: { code: Language; name: string; flag: string }[] = [
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'lv', name: 'Latviešu', flag: '🇱🇻' },
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
   ];
 
   return (
-    // Тег <header> открывается здесь
     <header className="sticky top-0 z-40 w-full border-b border-primary/20 bg-background/80 backdrop-blur-sm">
-      <div className="container mx-auto flex h-16 items-center justify-center px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
         
         <nav className="flex items-center gap-4 md:gap-8">
           {navLinks.map((link) => (
-            <a
+            
               key={link.href}
               href={link.href}
               className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-lg transition-all duration-300 hover:brightness-125"
@@ -25,9 +40,36 @@ const Header = () => {
             </a>
           ))}
         </nav>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="gap-2 hover:bg-primary/10 hover:text-primary"
+            >
+              <Globe className="h-4 w-4" />
+              <span className="hidden sm:inline">
+                {languages.find(l => l.code === language)?.flag}
+              </span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-40">
+            {languages.map((lang) => (
+              <DropdownMenuItem
+                key={lang.code}
+                onClick={() => setLanguage(lang.code)}
+                className={`cursor-pointer ${language === lang.code ? 'bg-primary/10' : ''}`}
+              >
+                <span className="mr-2">{lang.flag}</span>
+                {lang.name}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
         
       </div>
-    </header> // <-- ВОТ ИСПРАВЛЕНИЕ: </header> вместо </footer>
+    </header>
   );
 };
 
