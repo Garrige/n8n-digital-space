@@ -13,10 +13,10 @@ const Header = () => {
   const { language, setLanguage, t } = useLanguage();
 
   const navLinks = [
-    { href: "/", label: t.home },
-    { href: "#projects", label: t.projects },
-    { href: "#about", label: t.about },
-    { href: "#contact", label: t.contact },
+    { href: '/', label: t.home },
+    { href: '#projects', label: t.projects },
+    { href: '#about', label: t.about },
+    { href: '#contact', label: t.contact },
   ];
 
   const languages: { code: Language; name: string; flag: string }[] = [
@@ -50,7 +50,7 @@ const Header = () => {
             >
               <Globe className="h-4 w-4" />
               <span className="hidden sm:inline">
-                {languages.find(l => l.code === language)?.flag}
+                {languages.find((l) => l.code === language)?.flag}
               </span>
             </Button>
           </DropdownMenuTrigger>
