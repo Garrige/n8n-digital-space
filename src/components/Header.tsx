@@ -28,26 +28,22 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-primary/20 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        
         <nav className="flex items-center gap-4 md:gap-8">
-          {navLinks.map((link) => (
-            
-              key={link.href}
-              href={link.href}
-              className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-lg transition-all duration-300 hover:brightness-125"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-lg transition-all duration-300 hover:brightness-125"
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
-
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              className="gap-2 hover:bg-primary/10 hover:text-primary"
-            >
+            <Button variant="ghost" size="sm" className="gap-2 hover:bg-primary/10 hover:text-primary">
               <Globe className="h-4 w-4" />
               <span className="hidden sm:inline">
                 {languages.find((l) => l.code === language)?.flag}
@@ -55,19 +51,20 @@ const Header = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-40">
-            {languages.map((lang) => (
-              <DropdownMenuItem
-                key={lang.code}
-                onClick={() => setLanguage(lang.code)}
-                className={`cursor-pointer ${language === lang.code ? 'bg-primary/10' : ''}`}
-              >
-                <span className="mr-2">{lang.flag}</span>
-                {lang.name}
-              </DropdownMenuItem>
-            ))}
+            {languages.map((lang) => {
+              return (
+                <DropdownMenuItem
+                  key={lang.code}
+                  onClick={() => setLanguage(lang.code)}
+                  className={`cursor-pointer ${language === lang.code ? 'bg-primary/10' : ''}`}
+                >
+                  <span className="mr-2">{lang.flag}</span>
+                  {lang.name}
+                </DropdownMenuItem>
+              );
+            })}
           </DropdownMenuContent>
         </DropdownMenu>
-        
       </div>
     </header>
   );
