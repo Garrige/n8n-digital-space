@@ -1,35 +1,40 @@
-// src/components/Hero.tsx - ПОЛНАЯ ЗАМЕНА
-
 import { Button } from "@/components/ui/button";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="container mx-auto min-h-screen flex items-center px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         
-        {/* Левая часть: Текст */}
         <div className="text-center md:text-left">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Garri Gelfers
+          <h1 className="text-5xl md:text-7xl font-bold mb-2 text-gradient">
+            {t.heroTitle}
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 mb-8">
-            AI Automation Engineer | n8n Specialist | Building Intelligent Solutions
+          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-foreground/90">
+            {t.heroSubtitle}
+          </h2>
+          <p className="text-lg md:text-xl text-foreground/70 mb-8 max-w-xl">
+            {t.heroDescription}
           </p>
           <div className="flex justify-center md:justify-start">
             <a href="#projects">
-              <Button size="lg">
-                View My Work
+              <Button 
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
+              >
+                {t.heroButton}
               </Button>
             </a>
           </div>
         </div>
 
-        {/* Правая часть: Ваше фото */}
         <div className="flex justify-center">
           <img 
             src="/hero-photo.jpg" 
-            alt="Photo of Garri Gelfers"
-            className="rounded-lg shadow-2xl max-w-sm w-full md:max-w-md object-cover"
+            alt="Garri Gelfers - n8n Automation Expert"
+            className="rounded-lg shadow-2xl shadow-primary/20 max-w-sm w-full md:max-w-md object-cover border-2 border-primary/30 hover:border-primary/50 transition-all"
           />
         </div>
 

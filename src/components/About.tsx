@@ -1,49 +1,44 @@
-import { Code2, Workflow, Sparkles } from "lucide-react";
+import { Code2, Workflow, Sparkles, Database, Cloud, Zap } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const About = () => {
+  const { t } = useLanguage();
+  
   const skills = [
-    {
-      icon: Workflow,
-      title: "n8n & Automation",
-      description: "Expert in n8n workflows, Docker, REST APIs, HubSpot & Pipedrive integration",
-    },
-    {
-      icon: Sparkles,
-      title: "AI & RAG Systems",
-      description: "OpenAI integration, embeddings, Pinecone, intelligent chatbots and assistants",
-    },
-    {
-      icon: Code2,
-      title: "Integration & Web",
-      description: "Telegram, Slack bots, custom web apps, and business process automation",
-    },
+    { icon: Workflow, title: t.skills.automation },
+    { icon: Sparkles, title: t.skills.ai },
+    { icon: Code2, title: t.skills.apis },
+    { icon: Database, title: t.skills.databases },
+    { icon: Zap, title: t.skills.react },
+    { icon: Cloud, title: t.skills.cloud },
   ];
 
   return (
     <section id="about" className="py-24 bg-background">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center text-gradient">
-            About Me
+            {t.aboutTitle}
           </h2>
-          <p className="text-lg text-foreground/80 mb-12 text-center max-w-2xl mx-auto">
-            AI Automation Engineer specializing in n8n workflows, RAG systems, and intelligent chatbots. 
-            I help businesses automate processes, integrate AI solutions, and build custom applications 
-            that drive efficiency and growth.
+          <p className="text-lg text-foreground/80 mb-12 text-center max-w-3xl mx-auto leading-relaxed">
+            {t.aboutDescription}
           </p>
+
+          <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-foreground">
+            {t.aboutSkillsTitle}
+          </h3>
 
           <div className="grid md:grid-cols-3 gap-6">
             {skills.map((skill) => (
               <Card
                 key={skill.title}
-                className="p-6 bg-card hover:bg-card-hover transition-colors border-border"
+                className="p-6 bg-card hover:bg-card-hover transition-all duration-300 border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
               >
                 <skill.icon className="h-12 w-12 text-primary mb-4" />
-                <h3 className="text-xl font-semibold mb-2 text-foreground">
+                <h3 className="text-lg font-semibold text-foreground">
                   {skill.title}
                 </h3>
-                <p className="text-foreground/70">{skill.description}</p>
               </Card>
             ))}
           </div>

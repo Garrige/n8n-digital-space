@@ -1,8 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Projects = () => {
+  const { t } = useLanguage();
+  
   const projects = [
     {
       title: "RAG-powered Support Assistant",
@@ -40,7 +43,7 @@ const Projects = () => {
     <section id="projects" className="py-24 bg-card">
       <div className="container mx-auto px-6">
         <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-gradient">
-          Featured Projects
+          {t.projectsTitle}
         </h2>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
@@ -69,7 +72,7 @@ const Projects = () => {
                 variant="ghost"
                 className="w-full justify-between group/btn hover:bg-primary/10 hover:text-primary"
               >
-                View Details
+                {t.viewDetails}
                 <ExternalLink className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
               </Button>
             </Card>
