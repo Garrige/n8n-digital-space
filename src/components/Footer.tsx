@@ -28,7 +28,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <span>+371 27782827</span>
+                <span></span>
               </li>
               <li>
                 <span>Riga, Latvia</span>
