@@ -12,14 +12,14 @@ import {
 const Header = () => {
   const { language, setLanguage, t } = useLanguage();
 
-  const navLinks = [
+  const navLinks: Array<{ href: string; label: string }> = [
     { href: '/', label: t.home },
     { href: '#projects', label: t.projects },
     { href: '#about', label: t.about },
     { href: '#contact', label: t.contact },
   ];
 
-  const languages: { code: Language; name: string; flag: string }[] = [
+  const languages: Array<{ code: Language; name: string; flag: string }> = [
     { code: 'en', name: 'English', flag: '🇬🇧' },
     { code: 'lv', name: 'Latviešu', flag: '🇱🇻' },
     { code: 'ru', name: 'Русский', flag: '🇷🇺' },
