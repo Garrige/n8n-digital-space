@@ -15,7 +15,6 @@ const Header = () => {
   const navLinks: Array<{ href: string; label: string }> = [
     { href: '/', label: t.home },
     { href: '#projects', label: t.projects },
-    { href: '#about', label: t.about },
     { href: '#contact', label: t.contact },
   ];
 

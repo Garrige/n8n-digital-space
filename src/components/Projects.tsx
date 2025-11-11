@@ -1,41 +1,34 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Play } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useState } from 'react';
 
 const Projects = () => {
   const { t } = useLanguage();
+  const [videoOpen, setVideoOpen] = useState<string | null>(null);
   
   const projects = [
     {
-      title: "RAG-powered Support Assistant",
-      description: "AI system that significantly reduced response time using embeddings, knowledge base integration, and intelligent query processing for automated customer support.",
-      technologies: ["n8n", "OpenAI", "Pinecone", "Embeddings"],
+      key: 'project1',
+      image: '/project3-screenshot.jpg',
+      videoUrl: '/project1-video.mp4',
+      technologies: ["n8n", "OpenAI", "Chat Widget", "Calendar API"],
+      hasVideo: true,
     },
     {
-      title: "Lead Enrichment & CRM Integration",
-      description: "Automated data collection pipeline with real-time HubSpot and Pipedrive synchronization, streamlining sales processes and data quality.",
-      technologies: ["n8n", "HubSpot", "Pipedrive", "REST APIs"],
+      key: 'project2',
+      image: '/project3-screenshot.jpg',
+      videoUrl: '/project2-video.mp4',
+      technologies: ["n8n", "Gmail API", "Invoice Generation", "Booking System"],
+      hasVideo: true,
     },
     {
-      title: "AI Chat Receptionist",
-      description: "Intelligent client booking system with natural language understanding, achieving significant conversion rate improvements through automated conversations.",
-      technologies: ["n8n", "OpenAI", "Telegram", "Calendar API"],
-    },
-    {
-      title: "Multi-Platform Chatbot Integration",
-      description: "Unified AI assistant deployed across Telegram, Slack, and web platforms with context awareness and seamless user experience.",
-      technologies: ["n8n", "Telegram Bot API", "Slack API", "OpenAI"],
-    },
-    {
-      title: "Document Processing Automation",
-      description: "Automated workflow for document extraction, analysis, and routing using AI to process and categorize business documents at scale.",
-      technologies: ["n8n", "OpenAI", "Docker", "Database"],
-    },
-    {
-      title: "Business Analytics Dashboard",
-      description: "Custom web application with real-time data visualization and automated reporting for business intelligence and decision making.",
-      technologies: ["React", "TypeScript", "REST APIs"],
+      key: 'project3',
+      image: '/project3-screenshot.jpg',
+      videoUrl: null,
+      technologies: ["n8n", "RAG", "OpenAI", "Analytics", "Telegram Bot"],
+      hasVideo: false,
     },
   ];
 
@@ -46,38 +39,94 @@ const Projects = () => {
           {t.projectsTitle}
         </h2>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {projects.map((project) => (
-            <Card
-              key={project.title}
-              className="p-6 bg-background hover:bg-card-hover transition-all duration-300 border-border group hover:shadow-lg hover:shadow-primary/10"
-            >
-              <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
-                {project.title}
-              </h3>
-              <p className="text-foreground/70 mb-4 line-clamp-3">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <Button
-                variant="ghost"
-                className="w-full justify-between group/btn hover:bg-primary/10 hover:text-primary"
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {projects.map((project) => {
+            const projectData = t[project.key as keyof typeof t] as { title: string; description: string };
+            return (
+              <Card
+                key={project.key}
+                className="overflow-hidden bg-background hover:bg-card-hover transition-all duration-300 border-border group hover:shadow-xl hover:shadow-primary/20 hover:border-primary/50"
               >
-                {t.viewDetails}
-                <ExternalLink className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-              </Button>
-            </Card>
-          ))}
+                <div className="relative overflow-hidden h-56 cursor-pointer" onClick={() => project.hasVideo && project.videoUrl && setVideoOpen(project.videoUrl)}>
+                  <img 
+                    src={project.image} 
+                    alt={projectData.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                  
+                  {project.hasVideo && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-primary/90 hover:bg-primary text-primary-foreground rounded-full p-4 transition-all transform group-hover:scale-110">
+                        <Play className="h-8 w-8" fill="currentColor" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
+                    {projectData.title}
+                  </h3>
+                  <p className="text-foreground/70 mb-4 text-sm line-clamp-4">
+                    {projectData.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  {project.hasVideo ? (
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-between group/btn hover:bg-primary/10 hover:text-primary"
+                      onClick={() => project.videoUrl && setVideoOpen(project.videoUrl)}
+                    >
+                      {t.viewDetails}
+                      <Play className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-between group/btn hover:bg-primary/10 hover:text-primary"
+                    >
+                      {t.viewDetails}
+                      <ExternalLink className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                  )}
+                </div>
+              </Card>
+            );
+          })}
         </div>
+
+        {videoOpen && (
+          <div 
+            className="fixed inset-0 bg-background/95 z-50 flex items-center justify-center p-4"
+            onClick={() => setVideoOpen(null)}
+          >
+            <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
+              <video 
+                src={videoOpen} 
+                controls 
+                autoPlay
+                className="w-full rounded-lg shadow-2xl"
+              />
+              <Button 
+                onClick={() => setVideoOpen(null)}
+                className="mt-4 w-full"
+                variant="outline"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

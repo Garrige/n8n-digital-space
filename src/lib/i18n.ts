@@ -32,6 +32,20 @@ export const translations = {
     projectsTitle: 'Featured Projects',
     viewDetails: 'View Details',
     
+    // Projects
+    project1: {
+      title: 'AI Receptionist for Website',
+      description: 'Intelligent chat receptionist integrated into our website that handles client inquiries 24/7, schedules appointments, and improves conversion rates through natural conversations. Watch the 60-second demo video!'
+    },
+    project2: {
+      title: 'Hotel Reception Automation',
+      description: 'Automated hotel receptionist system that handles email responses, generates invoices, manages client bookings, and streamlines front desk operations. Complete workflow automation for hospitality business.'
+    },
+    project3: {
+      title: 'RAG Business Analytics System',
+      description: 'AI-powered business analytics system with knowledge base integration for intelligent data analysis and reporting. Includes dedicated website or Telegram bot interface for easy access to business insights.'
+    },
+    
     // Footer
     footerText: 'Transforming business operations through intelligent automation',
     footerRights: 'All rights reserved'
@@ -67,6 +81,20 @@ export const translations = {
     projectsTitle: 'Izvēlētie Projekti',
     viewDetails: 'Skatīt Detaļas',
     
+    // Projects
+    project1: {
+      title: 'AI Reģistrators Mājas Lapai',
+      description: 'Inteliģents čata reģistrators, integrēts mūsu vietnē, kas apkalpo klientu pieprasījumus 24/7, plāno tikšanās un uzlabo konversijas caur dabiskām sarunām. Skatiet 60 sekunžu demo video!'
+    },
+    project2: {
+      title: 'Viesnīcas Recepcijas Automatizācija',
+      description: 'Automatizēta viesnīcas reģistratora sistēma, kas apstrādā e-pasta atbildes, ģenerē rēķinus, pārvalda klientu rezervācijas. Pilnīga darba plūsmas automatizācija viesmīlības biznesam.'
+    },
+    project3: {
+      title: 'RAG Biznesa Analītikas Sistēma',
+      description: 'AI vadīta biznesa analītikas sistēma ar zināšanu bāzes integrāciju inteliģentai datu analīzei. Ietver īpašu vietni vai Telegram bota saskarni.'
+    },
+    
     // Footer
     footerText: 'Pārveidojot biznesa operācijas caur inteliģentu automatizāciju',
     footerRights: 'Visas tiesības aizsargātas'
@@ -101,6 +129,20 @@ export const translations = {
     // Projects section
     projectsTitle: 'Избранные Проекты',
     viewDetails: 'Подробнее',
+    
+    // Projects
+    project1: {
+      title: 'AI Ресепшионист для Сайта',
+      description: 'Интеллектуальный чат-ресепшионист, встроенный в наш сайт, который обрабатывает запросы клиентов 24/7, назначает встречи и улучшает конверсию через естественные диалоги. Смотрите 60-секундное видео!'
+    },
+    project2: {
+      title: 'Автоматизация Гостиничной Рецепции',
+      description: 'Автоматизированная система администратора гостиницы, которая обрабатывает email, генерирует счета, управляет бронированием. Полная автоматизация рабочего процесса для гостиничного бизнеса.'
+    },
+    project3: {
+      title: 'RAG Система Бизнес-Аналитики',
+      description: 'AI-система бизнес-аналитики с интеграцией базы знаний для интеллектуального анализа данных. Включает отдельный сайт или интерфейс Telegram-бота.'
+    },
     
     // Footer
     footerText: 'Трансформация бизнес-операций через интеллектуальную автоматизацию',
