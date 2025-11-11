@@ -11,14 +11,14 @@ const Projects = () => {
   const projects = [
     {
       key: 'project1',
-      image: '/project3-screenshot.jpg',
+      image: '/project-screenshotvideos.jpg',
       videoUrl: '/project1-video.mp4',
       technologies: ["n8n", "OpenAI", "Chat Widget", "Calendar API"],
       hasVideo: true,
     },
     {
       key: 'project2',
-      image: '/project3-screenshot.jpg',
+      image: '/project-screenshotvideos.jpg',
       videoUrl: '/project2-video.mp4',
       technologies: ["n8n", "Gmail API", "Invoice Generation", "Booking System"],
       hasVideo: true,
@@ -47,7 +47,10 @@ const Projects = () => {
                 key={project.key}
                 className="overflow-hidden bg-background hover:bg-card-hover transition-all duration-300 border-border group hover:shadow-xl hover:shadow-primary/20 hover:border-primary/50"
               >
-                <div className="relative overflow-hidden h-56 cursor-pointer" onClick={() => project.hasVideo && project.videoUrl && setVideoOpen(project.videoUrl)}>
+                <div 
+                  className="relative overflow-hidden h-56 cursor-pointer" 
+                  onClick={() => project.hasVideo && project.videoUrl && setVideoOpen(project.videoUrl)}
+                >
                   <img 
                     src={project.image} 
                     alt={projectData.title}
