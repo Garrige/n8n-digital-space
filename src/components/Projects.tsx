@@ -1,8 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Play } from "lucide-react";
+import { ExternalLink, Play, Rocket } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Projects = () => {
   const { t } = useLanguage();
@@ -15,6 +16,7 @@ const Projects = () => {
       videoUrl: '/project1-video.mp4',
       technologies: ["n8n", "OpenAI", "Chat Widget", "Calendar API"],
       hasVideo: true,
+      isInteractive: false,
     },
     {
       key: 'project2',
@@ -22,6 +24,7 @@ const Projects = () => {
       videoUrl: '/project2-video.mp4',
       technologies: ["n8n", "Gmail API", "Invoice Generation", "Booking System"],
       hasVideo: true,
+      isInteractive: false,
     },
     {
       key: 'project3',
@@ -29,6 +32,16 @@ const Projects = () => {
       videoUrl: null,
       technologies: ["n8n", "RAG", "OpenAI", "Analytics", "Telegram Bot"],
       hasVideo: false,
+      isInteractive: false,
+    },
+    {
+      key: 'project4',
+      image: '/project3-screenshot.jpg', // You can replace with real-estate screenshot
+      videoUrl: null,
+      technologies: ["n8n", "ss.lv Scraper", "Claude AI", "Email Alerts"],
+      hasVideo: false,
+      isInteractive: true,
+      demoUrl: '/projects/real-estate-analyzer',
     },
   ];
 
@@ -58,6 +71,14 @@ const Projects = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                   
+                  {project.isInteractive && (
+                    <div className="absolute top-4 right-4">
+                      <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                        LIVE DEMO
+                      </span>
+                    </div>
+                  )}
+                  
                   {project.hasVideo && (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="bg-primary/90 hover:bg-primary text-primary-foreground rounded-full p-4 transition-all transform group-hover:scale-110">
@@ -84,7 +105,18 @@ const Projects = () => {
                       </span>
                     ))}
                   </div>
-                  {project.hasVideo ? (
+                  
+                  {project.isInteractive ? (
+                    <Link to={project.demoUrl || '#'}>
+                      <Button
+                        variant="default"
+                        className="w-full justify-between group/btn"
+                      >
+                        Try Live Demo
+                        <Rocket className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
+                  ) : project.hasVideo ? (
                     <Button
                       variant="ghost"
                       className="w-full justify-between group/btn hover:bg-primary/10 hover:text-primary"

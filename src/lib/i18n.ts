@@ -45,6 +45,10 @@ export const translations = {
       title: 'RAG Business Analytics System',
       description: 'AI-powered business analytics system with knowledge base integration for intelligent data analysis and reporting. Includes dedicated website or Telegram bot interface for easy access to business insights.'
     },
+    project4: {
+      title: 'Riga Real Estate Analyzer',
+      description: 'AI-powered apartment finder for Riga. Automatically scrapes ss.lv, analyzes 100+ listings with Claude AI, and emails you the best deals based on real market data, district rankings, and building quality. Find underpriced apartments 10-15% below market average.'
+    },
     
     // Footer
     footerText: 'Transforming business operations through intelligent automation',
@@ -94,6 +98,10 @@ export const translations = {
       title: 'RAG Biznesa Analītikas Sistēma',
       description: 'AI vadīta biznesa analītikas sistēma ar zināšanu bāzes integrāciju inteliģentai datu analīzei. Ietver īpašu vietni vai Telegram bota saskarni.'
     },
+    project4: {
+      title: 'Rīgas Nekustamā Īpašuma Analizators',
+      description: 'AI dzīvokļu meklētājs Rīgā. Automātiski skenē ss.lv, analizē 100+ sludinājumus ar Claude AI un nosūta labākos piedāvājumus, pamatojoties uz tirgus datiem, rajonu reitingiem un māju kvalitāti. Atrodiet dzīvokļus 10-15% zem tirgus vidējās cenas.'
+    },
     
     // Footer
     footerText: 'Pārveidojot biznesa operācijas caur inteliģentu automatizāciju',
@@ -142,6 +150,10 @@ export const translations = {
     project3: {
       title: 'RAG Система Бизнес-Аналитики',
       description: 'AI-система бизнес-аналитики с интеграцией базы знаний для интеллектуального анализа данных. Включает отдельный сайт или интерфейс Telegram-бота.'
+    },
+    project4: {
+      title: 'Анализатор Недвижимости в Риге',
+      description: 'AI-поиск квартир в Риге. Автоматически скрапит ss.lv, анализирует 100+ объявлений с Claude AI и отправляет лучшие предложения на основе реальных рыночных данных, рейтингов районов и качества домов. Находите квартиры на 10-15% дешевле среднерыночной цены.'
     },
     
     // Footer
