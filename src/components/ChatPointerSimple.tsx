@@ -10,19 +10,22 @@ const ChatPointerSimple = ({ onDismiss }: ChatPointerSimpleProps) => {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
+    // Check if user has dismissed it before
     const dismissed = localStorage.getItem('chatPointerDismissed');
     if (dismissed) {
       setIsDismissed(true);
       return;
     }
 
+    // Show pointer after 3 seconds
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 2000);
+    }, 3000);
 
+    // Auto-hide after 20 seconds
     const autoHideTimer = setTimeout(() => {
       handleDismiss();
-    }, 15000);
+    }, 23000);
 
     return () => {
       clearTimeout(timer);
@@ -41,68 +44,68 @@ const ChatPointerSimple = ({ onDismiss }: ChatPointerSimpleProps) => {
 
   return (
     <>
-      {/* Контейнер */}
+      {/* Desktop version - points to chat button */}
       <div 
-        className="fixed bottom-32 right-32 z-[9999] hidden lg:block"
+        className="fixed bottom-28 right-28 z-[45] hidden lg:block"
         style={{
           animation: 'fadeInUp 0.8s ease-out'
         }}
       >
-        {/* Кнопка закрытия */}
+        {/* Close button */}
         <button
           onClick={handleDismiss}
-          className="absolute -top-6 -right-6 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-all hover:scale-110"
+          className="absolute -top-3 -right-3 bg-white rounded-full p-1.5 shadow-lg hover:bg-gray-100 transition-all hover:scale-110 z-10"
           aria-label="Close"
         >
           <X className="w-4 h-4 text-gray-600" />
         </button>
 
-        {/* Hand-drawn стиль стрелка и текст */}
+        {/* Message bubble */}
         <div className="relative">
-          {/* Текст в рамке */}
+          {/* Text in bubble */}
           <div 
-            className="relative bg-white px-6 py-3 rounded-lg shadow-xl border-2 border-primary mb-2"
+            className="relative bg-gradient-to-r from-primary to-accent px-5 py-3 rounded-2xl shadow-2xl mb-2 border-2 border-white"
             style={{
-              animation: 'wiggle 3s ease-in-out infinite'
+              animation: 'pulse 2s ease-in-out infinite'
             }}
           >
-            <p className="text-lg font-bold text-primary whitespace-nowrap">
-              Ask me a question!
+            <p className="text-base font-bold text-white whitespace-nowrap">
+              💬 Ask me anything!
             </p>
-            <p className="text-sm text-gray-600">
-              Chat with AI agent →
+            <p className="text-sm text-white/90">
+              Try the AI assistant →
             </p>
           </div>
 
-          {/* Hand-drawn стиль стрелка SVG */}
+          {/* Arrow pointing down-right to chat button */}
           <svg
-            width="250"
-            height="140"
-            viewBox="0 0 250 140"
-            className="absolute -bottom-8 -right-12"
+            width="200"
+            height="120"
+            viewBox="0 0 200 120"
+            className="absolute -bottom-6 -right-8"
             style={{
-              filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))'
+              filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15))'
             }}
           >
-            {/* Главная изогнутая линия */}
+            {/* Main curved arrow line */}
             <path
-              d="M 20 10 Q 80 30, 140 70 Q 160 85, 180 110"
+              d="M 20 10 Q 60 30, 100 60 Q 120 75, 140 95"
               stroke="currentColor"
-              strokeWidth="4"
+              strokeWidth="3"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="text-primary"
-              strokeDasharray="250"
-              strokeDashoffset="250"
+              strokeDasharray="200"
+              strokeDashoffset="200"
               style={{
-                animation: 'drawArrow 2s ease-out forwards'
+                animation: 'drawArrow 1.5s ease-out 0.5s forwards'
               }}
             />
             
-            {/* Наконечник стрелки */}
+            {/* Arrow head */}
             <path
-              d="M 180 110 L 170 105 L 175 115 Z"
+              d="M 140 95 L 132 90 L 135 100 Z"
               fill="currentColor"
               className="text-primary"
               style={{
@@ -111,26 +114,76 @@ const ChatPointerSimple = ({ onDismiss }: ChatPointerSimpleProps) => {
               }}
             />
 
-            {/* Hand-drawn эффект - вторая линия */}
+            {/* Shadow line for hand-drawn effect */}
             <path
-              d="M 22 12 Q 82 32, 142 72 Q 162 87, 182 112"
+              d="M 22 12 Q 62 32, 102 62 Q 122 77, 142 97"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.5"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-primary opacity-30"
-              strokeDasharray="250"
-              strokeDashoffset="250"
+              className="text-primary opacity-40"
+              strokeDasharray="200"
+              strokeDashoffset="200"
               style={{
-                animation: 'drawArrow 2s ease-out 0.1s forwards'
+                animation: 'drawArrow 1.5s ease-out 0.6s forwards'
               }}
             />
           </svg>
         </div>
       </div>
 
-      {/* CSS анимации */}
+      {/* Mobile version - simpler, appears above chat button */}
+      <div 
+        className="fixed bottom-28 right-6 z-[45] lg:hidden"
+        style={{
+          animation: 'fadeInUp 0.8s ease-out'
+        }}
+      >
+        <button
+          onClick={handleDismiss}
+          className="absolute -top-2 -right-2 bg-white rounded-full p-1 shadow-lg z-10"
+          aria-label="Close"
+        >
+          <X className="w-3 h-3 text-gray-600" />
+        </button>
+
+        <div 
+          className="bg-gradient-to-r from-primary to-accent px-4 py-2 rounded-xl shadow-xl"
+          style={{
+            animation: 'pulse 2s ease-in-out infinite'
+          }}
+        >
+          <p className="text-sm font-bold text-white">
+            💬 Try AI chat!
+          </p>
+        </div>
+
+        {/* Simple arrow pointing down */}
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+          className="absolute left-1/2 -translate-x-1/2 -bottom-8"
+        >
+          <path
+            d="M 20 5 L 20 30 M 20 30 L 15 25 M 20 30 L 25 25"
+            stroke="currentColor"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-primary"
+            strokeDasharray="60"
+            strokeDashoffset="60"
+            style={{
+              animation: 'drawArrow 1s ease-out 0.5s forwards'
+            }}
+          />
+        </svg>
+      </div>
+
+      {/* Animations */}
       <style>{`
         @keyframes fadeInUp {
           from {
@@ -155,18 +208,12 @@ const ChatPointerSimple = ({ onDismiss }: ChatPointerSimpleProps) => {
           }
         }
 
-        @keyframes wiggle {
+        @keyframes pulse {
           0%, 100% {
-            transform: rotate(0deg) translateY(0);
-          }
-          25% {
-            transform: rotate(-2deg) translateY(-2px);
+            transform: scale(1);
           }
           50% {
-            transform: rotate(0deg) translateY(0);
-          }
-          75% {
-            transform: rotate(2deg) translateY(-2px);
+            transform: scale(1.05);
           }
         }
       `}</style>

@@ -12,7 +12,7 @@ interface Message {
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Привет! Я AI ассистент Garri Gelfers. Чем могу помочь?", isBot: true }
+    { text: "Hi! I'm Garri Gelfers' AI assistant. How can I help you?", isBot: true }
   ]);
   const [currentInput, setCurrentInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,7 @@ const ChatWidget = () => {
   // Rate limiting
   const [messageTimestamps, setMessageTimestamps] = useState<number[]>([]);
   const MAX_MESSAGES = 10;
-  const TIME_WINDOW = 5 * 60 * 1000; // 5 минут
+  const TIME_WINDOW = 5 * 60 * 1000; // 5 minutes
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -47,10 +47,10 @@ const ChatWidget = () => {
   const handleSend = async () => {
     if (!currentInput.trim() || isLoading) return;
 
-    // Проверка rate limit
+    // Check rate limit
     if (!checkRateLimit()) {
       setMessages(prev => [...prev, { 
-        text: "Вы отправляете слишком много сообщений. Пожалуйста, подождите несколько минут или свяжитесь напрямую: garrigelfers@gmail.com", 
+        text: "You're sending too many messages. Please wait a few minutes or contact me directly: garrigelfers@gmail.com", 
         isBot: true 
       }]);
       setCurrentInput("");
@@ -80,17 +80,17 @@ const ChatWidget = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      // ИСПРАВЛЕНО: Сначала читаем как текст, потом пробуем JSON
+      // Read as text first, then try to parse as JSON
       const textResponse = await response.text();
       console.log("Raw response from n8n:", textResponse);
       
-      let aiResponse = "Извините, не удалось получить корректный ответ.";
+      let aiResponse = "Sorry, couldn't get a proper response.";
       
       try {
         const data = JSON.parse(textResponse);
         aiResponse = data.response || textResponse;
       } catch (e) {
-        // Если не JSON, используем как текст
+        // If not JSON, use as text
         aiResponse = textResponse;
       }
       
@@ -102,7 +102,7 @@ const ChatWidget = () => {
     } catch (error) {
       console.error("Error communicating with AI:", error);
       setMessages(prev => [...prev, { 
-        text: "Извините, произошла ошибка. Попробуйте позже или свяжитесь напрямую: garrigelfers@gmail.com", 
+        text: "Sorry, an error occurred. Please try again later or contact me directly: garrigelfers@gmail.com", 
         isBot: true 
       }]);
     } finally {
@@ -130,7 +130,7 @@ const ChatWidget = () => {
         </Button>
       )}
 
-      {/* Chat Window - ИСПРАВЛЕН РАЗМЕР */}
+      {/* Chat Window */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-card border border-border 
           sm:inset-auto sm:bottom-6 sm:right-6 
@@ -144,7 +144,7 @@ const ChatWidget = () => {
               <img src={garriLogo} alt="Garri Gelfers" className="w-10 h-10 rounded-full" />
               <div>
                 <h3 className="font-semibold text-white">Garri Gelfers AI</h3>
-                <p className="text-xs text-white/80">{isLoading ? "Печатает..." : "Онлайн"}</p>
+                <p className="text-xs text-white/80">{isLoading ? "Typing..." : "Online"}</p>
               </div>
             </div>
             <Button
@@ -196,7 +196,7 @@ const ChatWidget = () => {
                 value={currentInput}
                 onChange={(e) => setCurrentInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Напишите сообщение..."
+                placeholder="Type your message..."
                 className="flex-1"
                 disabled={isLoading}
               />

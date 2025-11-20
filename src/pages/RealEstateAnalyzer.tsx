@@ -68,7 +68,7 @@ const RealEstateAnalyzer = () => {
     setMessage('');
 
     try {
-      const response = await fetch('YOUR_N8N_WEBHOOK_URL', {
+      const response = await fetch('https://garrige.app.n8n.cloud/webhook/0e62a683-10a8-445f-9eb1-5fdc6122cdf1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ const RealEstateAnalyzer = () => {
 
         <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {/* Main Form */}
-          <Card className="lg:col-span-2 p-6 md:p-8 border-2">
+          <Card className="lg:col-span-2 p-6 md:p-8 border-2 border-primary/30 bg-card/80 backdrop-blur-sm">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Email */}
               <div>
@@ -214,10 +214,10 @@ const RealEstateAnalyzer = () => {
 
               {/* Status Message */}
               {message && (
-                <div className={`p-4 rounded-lg flex items-start gap-3 ${
-                  status === 'success' ? 'bg-green-500/10 text-green-600' :
-                  status === 'error' ? 'bg-red-500/10 text-red-600' :
-                  'bg-blue-500/10 text-blue-600'
+                <div className={`p-4 rounded-lg flex items-start gap-3 border-2 ${
+                  status === 'success' ? 'bg-green-500/10 text-green-600 border-green-500/30' :
+                  status === 'error' ? 'bg-red-500/10 text-red-600 border-red-500/30' :
+                  'bg-blue-500/10 text-blue-600 border-blue-500/30'
                 }`}>
                   {status === 'success' && <CheckCircle2 className="h-5 w-5 mt-0.5" />}
                   {status === 'error' && <AlertCircle className="h-5 w-5 mt-0.5" />}
@@ -250,7 +250,7 @@ const RealEstateAnalyzer = () => {
 
           {/* Info Sidebar */}
           <div className="space-y-6">
-            <Card className="p-6 border-2">
+            <Card className="p-6 border-2 border-primary/30 bg-card/80 backdrop-blur-sm">
               <h3 className="font-semibold text-lg mb-4">How it works</h3>
               <ol className="space-y-3 text-sm">
                 <li className="flex gap-3">
@@ -274,7 +274,7 @@ const RealEstateAnalyzer = () => {
               </ol>
             </Card>
 
-            <Card className="p-6 border-2 bg-primary/5">
+            <Card className="p-6 border-2 border-primary/30 bg-primary/5 backdrop-blur-sm">
               <h3 className="font-semibold text-lg mb-2">What AI analyzes</h3>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-2">
@@ -296,7 +296,7 @@ const RealEstateAnalyzer = () => {
               </ul>
             </Card>
 
-            <Card className="p-6 border-2">
+            <Card className="p-6 border-2 border-primary/30 bg-card/80 backdrop-blur-sm">
               <p className="text-sm text-muted-foreground">
                 <strong className="text-foreground">100% Free</strong>
                 <br />
@@ -311,7 +311,7 @@ const RealEstateAnalyzer = () => {
 
         {/* Features */}
         <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <Card className="p-6 text-center">
+          <Card className="p-6 text-center border-2 border-primary/20 bg-card/80 backdrop-blur-sm hover:border-primary/40 transition-all">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🤖</span>
             </div>
@@ -320,7 +320,7 @@ const RealEstateAnalyzer = () => {
               Claude analyzes each listing against 20+ market benchmarks
             </p>
           </Card>
-          <Card className="p-6 text-center">
+          <Card className="p-6 text-center border-2 border-primary/20 bg-card/80 backdrop-blur-sm hover:border-primary/40 transition-all">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">⚡</span>
             </div>
@@ -329,7 +329,7 @@ const RealEstateAnalyzer = () => {
               Fresh listings scraped directly from ss.lv
             </p>
           </Card>
-          <Card className="p-6 text-center">
+          <Card className="p-6 text-center border-2 border-primary/20 bg-card/80 backdrop-blur-sm hover:border-primary/40 transition-all">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">📊</span>
             </div>
