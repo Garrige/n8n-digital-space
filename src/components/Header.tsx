@@ -19,7 +19,7 @@ const Header = () => {
   ];
 
   const languages: Array<{ code: Language; name: string; flag: string }> = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'en', name: 'English', flag: 'ENG' },
     { code: 'lv', name: 'Latviešu', flag: '🇱🇻' },
     { code: 'ru', name: 'Русский', flag: '🇷🇺' },
   ];
