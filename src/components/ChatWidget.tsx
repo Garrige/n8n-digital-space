@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send } from "lucide-react";
 import garriLogo from "@/assets/garri-logo.png";
+import AiArrow from "@/assets/Ai-arrow.png";
 
 interface Message {
   text: string;
@@ -130,38 +131,48 @@ const ChatWidget = () => {
 
   return (
     <>
-      {/* Подсказка + стрелка (только когда чат закрыт, только на десктопе) */}
+      {/* Стрелка и пузырь подсказки — только когда чат закрыт */}
       {!isOpen && (
-        <div className="hidden md:flex fixed bottom-28 right-10 z-40 items-center gap-3 pointer-events-none">
-          {/* Пузырь с текстом */}
-          <div className="rounded-2xl border border-white/20 bg-white/5 px-4 py-2 backdrop-blur-md shadow-lg">
-            <p className="text-sm text-[#C5A572]">
-              Поговори с моим AI 😉
-            </p>
-          </div>
+        <>
+          {/* Большая стрелка из Canva, указывающая на кнопку чата */}
+          <img
+            src={AiArrow}
+            alt="Talk to my AI"
+            className="
+              hidden lg:block
+              fixed
+              bottom-32
+              right-32
+              w-64
+              opacity-90
+              pointer-events-none
+              select-none
+              z-30
+            "
+          />
 
-          {/* Стрелка к виджету */}
-          <div className="w-10 h-10">
-            <svg
-              viewBox="0 0 50 50"
-              className="w-full h-full text-[#C5A572]"
-            >
-              <path
-                d="M5 5 L42 42"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              />
-              <path
-                d="M26 42 H42 V26"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+          {/* Пузырь с текстом рядом с кнопкой */}
+          <div
+            className="
+              hidden md:flex
+              fixed
+              bottom-10
+              right-32
+              z-40
+              items-center
+              px-4
+              py-2
+              rounded-2xl
+              border border-white/20
+              bg-white/5
+              backdrop-blur-md
+              shadow-lg
+              pointer-events-none
+            "
+          >
+            <p className="text-sm text-[#C5A572]">Поговори с моим AI 😉</p>
           </div>
-        </div>
+        </>
       )}
 
       {/* Кнопка чата */}
