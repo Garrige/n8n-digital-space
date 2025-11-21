@@ -52,7 +52,8 @@ const ChatWidget = () => {
       setMessages((prev) => [
         ...prev,
         {
-          text: "You're sending too many messages. Please wait a few minutes or contact me directly: garrigelfers@gmail.com",
+          text:
+            "You're sending too many messages. Please wait a few minutes or contact me directly: garrigelfers@gmail.com",
           isBot: true,
         },
       ]);
@@ -86,7 +87,6 @@ const ChatWidget = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Read as text first, then try to parse as JSON
       const textResponse = await response.text();
       console.log("Raw response from n8n:", textResponse);
 
@@ -96,7 +96,6 @@ const ChatWidget = () => {
         const data = JSON.parse(textResponse);
         aiResponse = data.response || textResponse;
       } catch (e) {
-        // If not JSON, use as text
         aiResponse = textResponse;
       }
 
@@ -112,7 +111,8 @@ const ChatWidget = () => {
       setMessages((prev) => [
         ...prev,
         {
-          text: "Sorry, an error occurred. Please try again later or contact me directly: garrigelfers@gmail.com",
+          text:
+            "Sorry, an error occurred. Please try again later or contact me directly: garrigelfers@gmail.com",
           isBot: true,
         },
       ]);
@@ -130,7 +130,41 @@ const ChatWidget = () => {
 
   return (
     <>
-      {/* Chat Button */}
+      {/* Подсказка + стрелка (только когда чат закрыт, только на десктопе) */}
+      {!isOpen && (
+        <div className="hidden md:flex fixed bottom-28 right-10 z-40 items-center gap-3 pointer-events-none">
+          {/* Пузырь с текстом */}
+          <div className="rounded-2xl border border-white/20 bg-white/5 px-4 py-2 backdrop-blur-md shadow-lg">
+            <p className="text-sm text-[#C5A572]">
+              Поговори с моим AI 😉
+            </p>
+          </div>
+
+          {/* Стрелка к виджету */}
+          <div className="w-10 h-10">
+            <svg
+              viewBox="0 0 50 50"
+              className="w-full h-full text-[#C5A572]"
+            >
+              <path
+                d="M5 5 L42 42"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+              <path
+                d="M26 42 H42 V26"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      )}
+
+      {/* Кнопка чата */}
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
@@ -141,7 +175,7 @@ const ChatWidget = () => {
         </Button>
       )}
 
-      {/* Chat Window */}
+      {/* Окно чата */}
       {isOpen && (
         <div
           className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-card border border-border
