@@ -36,7 +36,7 @@ const Projects = () => {
     },
     {
       key: 'project4',
-      image: '/project3-screenshot.jpg', // You can replace with real-estate screenshot
+      image: '/realEstateAI.jpg', 
       videoUrl: null,
       technologies: ["n8n", "ss.lv Scraper", "Claude AI", "Email Alerts"],
       hasVideo: false,
